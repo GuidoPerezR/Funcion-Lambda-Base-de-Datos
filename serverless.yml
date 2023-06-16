@@ -1,0 +1,21 @@
+service: xenio-lambda-service-v2
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: DevReportes
+  stage: dev
+
+functions:
+  generarTimbrado:
+    handler: src/generarTimbradoFacturaContado.generarTimbradoFacturaContado
+    events:
+      - http:
+          path: /generarFactura/{idVentaFactura}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                idVentaFactura: true
